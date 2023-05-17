@@ -1,0 +1,80 @@
+[{
+    "_id": "6464eed5b28bbdf31c6049fa",
+    "code": "1234",
+    "words": [
+      "tramp", "fuse", "mouse",
+      "apple", "tree", "sun",
+      "car", "book", "glory",
+      "animal", "tray", "house",
+      "ball", "flower", "water",
+      "sky", "green", "torque",
+      "red", "moon", "music",
+      "cloud", "fish", "orange",
+      "breath"
+    ],
+    "firstPlayer": "red",
+    "Player1": [
+      "tramp", "fuse",
+      "mouse", "apple",
+      "tree", "sun",
+      "car", "book"
+    ],
+    "Player2": [
+      "glory", "animal",
+      "tray", "house",
+      "ball", "flower",
+      "water", "sky"
+    ],
+    "Yellow": [
+      "green", "torque",
+      "red", "moon",
+      "music", "cloud",
+      "fish", "orange"
+    ],
+    "Black": ["breath"]
+  },
+  {
+    "_id": "random_id_1",
+    "code": "1234",
+    "words": ["car", "apple", "tree", "dog", "sun", "flower", "house", "mountain", "banana", "rainbow", "guitar", "ocean", "lion", "island", "kite", "violin", "waterfall", "elephant", "jungle", "notebook", "umbrella", "zebra", "xylophone", "queen", "piano"],
+    "firstPlayer": "red",
+    "Player1": ["car", "apple", "tree", "dog", "sun", "flower", "house", "mountain"],
+    "Player2": ["banana", "rainbow", "guitar", "ocean", "lion", "island", "kite", "violin"],
+    "Yellow": ["waterfall", "elephant", "jungle", "notebook", "umbrella", "zebra", "xylophone", "queen"],
+    "Black": ["piano"]
+  },
+  {
+    "_id": "random_id_8",
+    "code": "2468",
+    "words": ["chair", "apple", "mountain", "dog", "sunflower", "house", "guitar", "river", "banana", "rainbow", "elephant", "forest", "island", "jungle", "lion", "waterfall", "beach", "kite", "notebook", "xylophone", "queen", "umbrella", "zebra", "moon", "piano"],
+    "firstPlayer": "blue",
+    "Player1": ["chair", "apple", "mountain", "dog", "sunflower", "house", "guitar", "river"],
+    "Player2": ["banana", "rainbow", "elephant", "forest", "island", "jungle", "lion", "waterfall"],
+    "Yellow": ["beach", "kite", "notebook", "xylophone", "queen", "umbrella", "zebra", "moon"],
+    "Black": ["piano"]
+  },
+  {
+    "_id": "random_id_9",
+    "code": "9876",
+    "words": ["ocean", "apple", "mountain", "cat", "sun", "rose", "guitar", "river", "banana", "rainbow", "elephant", "forest", "island", "jungle", "lion", "waterfall", "beach", "kite", "notebook", "xylophone", "queen", "umbrella", "zebra", "moon", "piano"],
+    "firstPlayer": "red",
+    "Player1": ["ocean", "apple", "mountain", "cat", "sun", "rose", "guitar", "river"],
+    "Player2": ["banana", "rainbow", "elephant", "forest", "island", "jungle", "lion", "waterfall"],
+    "Yellow": ["beach", "kite", "notebook", "xylophone", "queen", "umbrella", "zebra", "moon"],
+    "Black": ["piano"]
+  },
+  {
+    "_id": "random_id_10",
+    "code": "5432",
+    "words": ["chair", "orange", "road", "cat", "moon", "laptop", "ocean", "book", "river", "bird", "tree", "cup", "mountain", "guitar", "beach", "rain", "sun", "piano", "fish", "sky", "flower", "star", "fire", "door", "car"],
+    "firstPlayer": "blue",
+    "Player1": ["chair", "orange", "road", "cat", "moon", "laptop", "ocean", "book"],
+    "Player2": ["river", "bird", "tree", "cup", "mountain", "guitar", "beach", "rain"],
+    "Yellow": ["sun", "piano", "fish", "sky", "flower", "star", "fire", "door"],
+    "Black": ["car"]
+  }
+  
+  
+  
+  
+]
