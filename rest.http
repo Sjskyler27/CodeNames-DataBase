@@ -1,3 +1,6 @@
 //LOCAL HOST
 // GET ALL
-GET http://localhost:8080/ 
+GET http://localhost:8080/
+###
+// GET CODE
+GET http://localhost:8080/1234
