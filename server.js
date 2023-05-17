@@ -7,6 +7,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use('/', require('./routes/solution'));
 
-app.listen(8080);
-
-console.log(`Web server at port: ${8080}`);
+const port = process.env.port || 8080;
+app.listen(port)
+console.log(`Web server at port: ${port}`);

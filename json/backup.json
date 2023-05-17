@@ -1,17 +1,7 @@
 [{
     "_id": "6464eed5b28bbdf31c6049fa",
     "code": "1234",
-    "words": [
-      "tramp", "fuse", "mouse",
-      "apple", "tree", "sun",
-      "car", "book", "glory",
-      "animal", "tray", "house",
-      "ball", "flower", "water",
-      "sky", "green", "torque",
-      "red", "moon", "music",
-      "cloud", "fish", "orange",
-      "breath"
-    ],
+    "words": ["mouse", "glory", "ball", "torque", "animal", "red", "tray", "car", "music", "sky", "moon", "water", "green", "fish", "flower", "house", "cloud", "sun", "book", "orange", "tramp", "apple", "tree", "water", "breath"],
     "firstPlayer": "red",
     "Player1": [
       "tramp", "fuse",
@@ -36,7 +26,7 @@
   {
     "_id": "random_id_1",
     "code": "4875",
-    "words": ["car", "apple", "tree", "dog", "sun", "flower", "house", "mountain", "banana", "rainbow", "guitar", "ocean", "lion", "island", "kite", "violin", "waterfall", "elephant", "jungle", "notebook", "umbrella", "zebra", "xylophone", "queen", "piano"],
+    "words":  ["jungle", "rainbow", "piano", "ocean", "mountain", "notebook", "house", "banana", "flower", "zebra", "car", "kite", "violin", "dog", "queen", "waterfall", "tree", "sun", "xylophone", "lion", "umbrella", "island", "guitar", "elephant", "apple"],
     "firstPlayer": "red",
     "Player1": ["car", "apple", "tree", "dog", "sun", "flower", "house", "mountain"],
     "Player2": ["banana", "rainbow", "guitar", "ocean", "lion", "island", "kite", "violin"],
