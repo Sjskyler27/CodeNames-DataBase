@@ -1,7 +1,11 @@
 [{
     "_id": "6464eed5b28bbdf31c6049fa",
     "code": "1234",
-    "words": ["mouse", "glory", "ball", "torque", "animal", "red", "tray", "car", "music", "sky", "moon", "water", "green", "fish", "flower", "house", "cloud", "sun", "book", "orange", "tramp", "apple", "tree", "water", "breath"],
+    "words": [
+      "green", "torque", "fish", "car", "house", "tray", "red", "mouse", "ball",
+      "tree", "music", "water", "moon", "orange", "sky", "flower", "book", "sun",
+      "animal", "cloud", "tramp", "glory", "fuse", "breath", "apple"
+    ],
     "firstPlayer": "red",
     "Player1": [
       "tramp", "fuse",
