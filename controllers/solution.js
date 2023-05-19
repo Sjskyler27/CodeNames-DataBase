@@ -69,10 +69,28 @@ const createFromWords = async (req, res)=>{
         res.status(500).json(response.error || 'could not create the solution.');
     }
 
+    // after adding a new one delete the first
+    await deleteFirstDocument();
+}
+
+// This function deletes the first document in the collection
+// It doesn't need to handle HTTP requests or responses, so it doesn't take req or res as arguments
+const deleteFirstDocument = async () => {
+    const db = await database.connectDatabase();
+    await db.collection('solutions').findOneAndDelete({});
+    
+};
+
+const deleteFirst = async (req, res) => {
+     // Find and delete the first document
+    await deleteFirstDocument();
+    res.status(200).json({ message: 'First document deleted successfully... probably' });
+
 }
 module.exports = {
     getAll,
     getByCode,
     basicCreate,
-    createFromWords
+    createFromWords,
+    deleteFirst
 };
