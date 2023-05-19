@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 const database = require('../db/connect');
 
 const getAll = async (req, res)=>{
@@ -34,9 +36,43 @@ const basicCreate = async (req, res)=>{
         res.status(500).json(response.error || 'could not create the solution.');
     }
 };
+const createFromWords = async (req, res)=>{
+    const db = await database.connectDatabase();
+    console.log('attempting to create document: \n');
+
+    const getWords =  _.shuffle(req.body.wordList)
+    
+    const wordList = getWords.slice(0,25);
+    const code= _.sampleSize('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4).join('');
+    const firstPlayer= _.sample(['red', 'blue']);
+    const player1= wordList.slice(0,9);
+    const player2= wordList.slice(9,17);
+    const yellow= wordList.slice(17,24);
+    const black= wordList.slice(24,25);
+    const shuffledWords = _.shuffle(wordList)
+
+    const solution = {
+        code: code,
+        words: shuffledWords,
+        firstPlayer: firstPlayer,
+        Player1: player1,
+        Player2: player2,
+        Yellow: yellow,
+        Black: black
+      };
+    
+    const response = await db.collection('solutions').insertOne(solution);
+
+    if (response.acknowledged) {
+        res.status(201).json(response);
+    } else {
+        res.status(500).json(response.error || 'could not create the solution.');
+    }
+
+}
 module.exports = {
     getAll,
     getByCode,
-    basicCreate
-
+    basicCreate,
+    createFromWords
 };

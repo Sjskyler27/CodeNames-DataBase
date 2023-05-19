@@ -8,5 +8,7 @@ routes.get('/', controller.getAll);
 routes.get('/:code', controller.getByCode);
 
 routes.post('/create', controller.basicCreate);
+routes.post('/createFromWords', controller.createFromWords);
+
 
 module.exports = routes;
