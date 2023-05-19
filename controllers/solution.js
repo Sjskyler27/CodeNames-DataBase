@@ -8,6 +8,7 @@ const getAll = async (req, res)=>{
     console.log(result);
     res.send(result);
 };
+
 const getByCode = async (req, res)=>{
     const db = await database.connectDatabase();
     const code = req.params.code;
@@ -15,6 +16,21 @@ const getByCode = async (req, res)=>{
     console.log(result);
     res.send(result);
 };
+
+const getAllCodes = async (req, res) => {
+    console.log('getting all codes.')
+    const db = await database.connectDatabase();
+    try {
+        const result = await db.collection('solutions').find({}, { code: 1 }).toArray();
+        const codes = result.map((item) => item.code);
+        console.log(codes);
+        res.send(codes);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('An error occurred while retrieving the codes.');
+    }
+};
+
 const basicCreate = async (req, res)=>{
     const db = await database.connectDatabase();
     console.log('attempting to insert: \n' + req.body);
@@ -104,5 +120,6 @@ module.exports = {
     getByCode,
     basicCreate,
     createFromWords,
-    deleteFirst
+    deleteFirst,
+    getAllCodes
 };
