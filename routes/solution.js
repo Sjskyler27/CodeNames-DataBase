@@ -10,5 +10,7 @@ routes.get('/:code', controller.getByCode);
 routes.post('/create', controller.basicCreate);
 routes.post('/createFromWords', controller.createFromWords);
 
+routes.delete('/deleteFirst', controller.deleteFirst);
+
 
 module.exports = routes;

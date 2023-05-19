@@ -62,17 +62,41 @@ const createFromWords = async (req, res)=>{
       };
     
     const response = await db.collection('solutions').insertOne(solution);
-
+    
     if (response.acknowledged) {
         res.status(201).json(response);
+        // after adding a new one delete the first
+        await db.collection('solutions').findOneAndDelete({});
     } else {
         res.status(500).json(response.error || 'could not create the solution.');
     }
 
+    
+}
+
+// This function deletes the first document in the collection
+// It doesn't need to handle HTTP requests or responses, so it doesn't take req or res as arguments
+// const deleteFirstDocument = async () => {
+//     const db = await database.connectDatabase();
+//     await db.collection('solutions').findOneAndDelete({});
+    
+// };
+
+const deleteFirst = async (req, res) => {
+    const db = await database.connectDatabase();
+
+    // Find and delete the first document
+    const response = await db.collection('solutions').findOneAndDelete({});
+    if (response.ok) {
+        res.status(200).json({ message: 'First document deleted successfully' });
+    } else {
+        res.status(500).json(response.error || 'Could not delete the document.');
+    }
 }
 module.exports = {
     getAll,
     getByCode,
     basicCreate,
-    createFromWords
+    createFromWords,
+    deleteFirst
 };
