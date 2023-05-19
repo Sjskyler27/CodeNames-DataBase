@@ -5,12 +5,14 @@ const cors = require('cors'); // Import the cors middleware
 routes.use(cors()); // Enable CORS for all routes
 
 routes.get('/', controller.getAll);
+routes.get('/getAllCodes', controller.getAllCodes);
 routes.get('/:code', controller.getByCode);
 
 routes.post('/create', controller.basicCreate);
 routes.post('/createFromWords', controller.createFromWords);
 
 routes.delete('/deleteFirst', controller.deleteFirst);
+
 
 
 module.exports = routes;
