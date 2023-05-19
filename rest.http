@@ -3,4 +3,5 @@
 GET http://localhost:8080/
 ###
 // GET CODE
-GET http://localhost:8080/1234
+GET http://localhost:8080/UISX
+
