@@ -64,8 +64,14 @@ const createFromWords = async (req, res)=>{
     const response = await db.collection('solutions').insertOne(solution);
     
     if (response.acknowledged) {
-        res.status(201).json(response);
-        // after adding a new one delete the first
+        // Send a response with the code and other data
+        res.status(201).json({
+            code: code,
+            message: "Solution created successfully",
+            documentId: response.insertedId // You might also want the MongoDB document ID
+        });
+
+        // After adding a new one, delete the first
         await db.collection('solutions').findOneAndDelete({});
     } else {
         res.status(500).json(response.error || 'could not create the solution.');
