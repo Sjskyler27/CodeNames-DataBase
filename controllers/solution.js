@@ -3,6 +3,7 @@ const _ = require('lodash');
 const database = require('../db/connect');
 
 const getAll = async (req, res)=>{
+    // #swagger.description = 'get all solutions'
     const db = await database.connectDatabase();
     const result = await db.collection('solutions').find().toArray();
     console.log(result);
@@ -10,6 +11,9 @@ const getAll = async (req, res)=>{
 };
 
 const getByCode = async (req, res)=>{
+    // #swagger.description = 'Retrieves a solution by code.'
+    // #swagger.parameters['code'] = { in: 'path', description: 'Code of the solution to retrieve', required: true, type: 'string' }
+  
     const db = await database.connectDatabase();
     const code = req.params.code;
     const result = await db.collection('solutions').findOne({"code": code});
@@ -18,6 +22,7 @@ const getByCode = async (req, res)=>{
 };
 
 const getAllCodes = async (req, res) => {
+    // #swagger.description = 'Retrieves all codes.'
     console.log('getting all codes.')
     const db = await database.connectDatabase();
     try {
@@ -32,6 +37,8 @@ const getAllCodes = async (req, res) => {
 };
 
 const basicCreate = async (req, res)=>{
+    // #swagger.description = 'Creates a new solution.'
+    // #swagger.parameters['body'] = { in: 'body', description: 'Solution data', required: true, schema: { $ref: '#/definitions/SolutionData' } }
     const db = await database.connectDatabase();
     console.log('attempting to insert: \n' + req.body);
     const solution = {
@@ -53,6 +60,9 @@ const basicCreate = async (req, res)=>{
     }
 };
 const createFromWords = async (req, res)=>{
+    // #swagger.description = 'Creates a new solution from words.'
+    // #swagger.parameters['body'] = { in: 'body', description: 'List of words', required: true, schema: { $ref: '#/definitions/WordList' } }
+  
     const db = await database.connectDatabase();
     console.log('attempting to create document: \n');
 
@@ -68,7 +78,7 @@ const createFromWords = async (req, res)=>{
     const shuffledWords = _.shuffle(wordList)
 
     const solution = {
-        code: code,
+        code: code, 
         words: shuffledWords,
         firstPlayer: firstPlayer,
         Player1: player1,
@@ -105,6 +115,7 @@ const createFromWords = async (req, res)=>{
 // };
 
 const deleteFirst = async (req, res) => {
+    // #swagger.description = 'Deletes the first solution.'
     const db = await database.connectDatabase();
 
     // Find and delete the first document

@@ -5,6 +5,9 @@ GET https://codenamesdb.onrender.com
 // GET CODE
 GET https://codenamesdb.onrender.com
 ###
+// GET ALL CODES
+GET https://codenamesdb.onrender.com/getAllCodes
+###
 // CREATE NEW
 POST https://codenamesdb.onrender.com/createFromWords HTTP/1.1 
 content-type: application/json
