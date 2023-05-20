@@ -5,6 +5,7 @@ GET http://localhost:8080/
 // GET CODE
 GET http://localhost:8080/UISX
 ###
+// GET ALL CODES
 GET http://localhost:8080/getAllCodes
 ###
 // CREATE NEW

@@ -14,7 +14,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "get all solutions",
         "parameters": [],
         "responses": {
           "200": {
@@ -25,7 +25,7 @@
     },
     "/getAllCodes": {
       "get": {
-        "description": "",
+        "description": "Retrieves all codes.",
         "parameters": [],
         "responses": {
           "200": {
@@ -39,13 +39,14 @@
     },
     "/{code}": {
       "get": {
-        "description": "",
+        "description": "Retrieves a solution by code.",
         "parameters": [
           {
             "name": "code",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Code of the solution to retrieve"
           }
         ],
         "responses": {
@@ -57,36 +58,15 @@
     },
     "/create": {
       "post": {
-        "description": "",
+        "description": "Creates a new solution.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "Solution data",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "code": {
-                  "example": "any"
-                },
-                "words": {
-                  "example": "any"
-                },
-                "firstPlayer": {
-                  "example": "any"
-                },
-                "Player1": {
-                  "example": "any"
-                },
-                "Player2": {
-                  "example": "any"
-                },
-                "Yellow": {
-                  "example": "any"
-                },
-                "Black": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/SolutionData"
             }
           }
         ],
@@ -102,18 +82,15 @@
     },
     "/createFromWords": {
       "post": {
-        "description": "",
+        "description": "Creates a new solution from words.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "description": "List of words",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "wordList": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/WordList"
             }
           }
         ],
@@ -129,7 +106,7 @@
     },
     "/deleteFirst": {
       "delete": {
-        "description": "",
+        "description": "Deletes the first solution.",
         "parameters": [],
         "responses": {
           "200": {
@@ -137,6 +114,141 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WordList": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "wordList": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "array"
+                },
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": {
+          "type": "array",
+          "example": [
+            "wordList"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SolutionData": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "example": "object"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "words": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "firstPlayer": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "Player1": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "Player2": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "Yellow": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            },
+            "Black": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": {
+          "type": "array",
+          "example": [
+            "code",
+            "words",
+            "firstPlayer",
+            "Player1",
+            "Player2",
+            "Yellow",
+            "Black"
+          ],
+          "items": {
+            "type": "string"
           }
         }
       }

@@ -5,8 +5,49 @@ const doc = {
     title: 'CodeNames API',
     description: 'This API creates games for CodeNames',
   },
-  host: 'https://codenamesdb.onrender.com',
+  host: 'codenamesdb.onrender.com',
   schemes: ['https','http'],
+  definitions: {
+    WordList: {
+      type: 'object',
+      properties: {
+        wordList: {
+          type: 'array',
+          items: {
+            type: 'string',
+          },
+        },
+      },
+      required: ['wordList'],
+    },
+    SolutionData: {
+      type: 'object',
+      properties: {
+        code: {
+          type: 'string',
+        },
+        words: {
+          type: 'string',
+        },
+        firstPlayer: {
+          type: 'string',
+        },
+        Player1: {
+          type: 'string',
+        },
+        Player2: {
+          type: 'string',
+        },
+        Yellow: {
+          type: 'string',
+        },
+        Black: {
+          type: 'string',
+        },
+      },
+      required: ['code', 'words', 'firstPlayer', 'Player1', 'Player2', 'Yellow', 'Black'],
+    },
+  },
 };
 
 const outputFile = './swagger-output.json';
