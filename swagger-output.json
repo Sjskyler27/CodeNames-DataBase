@@ -12,17 +12,6 @@
     "http"
   ],
   "paths": {
-    "/": {
-      "get": {
-        "description": "get all solutions",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/getAllCodes": {
       "get": {
         "description": "Retrieves all codes.",
@@ -49,6 +38,17 @@
             "description": "Code of the solution to retrieve"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "description": "get all solutions",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -97,6 +97,39 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/addToClicked/{code}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clicked": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"

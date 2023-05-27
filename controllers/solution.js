@@ -84,7 +84,8 @@ const createFromWords = async (req, res)=>{
         Player1: player1,
         Player2: player2,
         Yellow: yellow,
-        Black: black
+        Black: black,
+        clicked: ['test']
       };
     
     const response = await db.collection('solutions').insertOne(solution);
@@ -106,13 +107,43 @@ const createFromWords = async (req, res)=>{
     
 }
 
-// This function deletes the first document in the collection
-// It doesn't need to handle HTTP requests or responses, so it doesn't take req or res as arguments
-// const deleteFirstDocument = async () => {
-//     const db = await database.connectDatabase();
-//     await db.collection('solutions').findOneAndDelete({});
+const addToClicked = async (req, res) => {
+    const db = await database.connectDatabase();
     
-// };
+    const code = req.params.code;
+    console.log(code);
+
+    const clickedString = req.body.clicked;
+    
+    let response;
+    // response = await db.collection('solutions').updateOne({ code: code }, { $push: { clicked: clickedString } });
+    try {
+      const gameCollection = db.collection('solutions');
+      const game = await gameCollection.findOne({ code: code });
+  
+      if (!game) {
+        throw new Error('Game not found');
+      }
+
+      if (!game.clicked) {
+        // If 'clicked' field doesn't exist, create it as an array with the clickedString
+        response = await gameCollection.updateOne({ code: code }, { $set: { clicked: [clickedString] } });
+      } else {
+        // 'clicked' field exists, push the clickedString to the array
+        response = await gameCollection.updateOne({ code: code }, { $push: { clicked: clickedString } });
+      }
+    } catch (error) {
+      console.error(error);
+      throw new Error('An error occurred while adding the clicked string.');
+    }
+    if (response.acknowledged) {
+        res.status(200).json(response);
+    } else {
+        res.status(500).json(response.error || 'could not update the clicked cards.');
+    }
+  };
+  
+  
 
 const deleteFirst = async (req, res) => {
     // #swagger.description = 'Deletes the first solution.'
@@ -129,8 +160,9 @@ const deleteFirst = async (req, res) => {
 module.exports = {
     getAll,
     getByCode,
+    getAllCodes,
     basicCreate,
     createFromWords,
-    deleteFirst,
-    getAllCodes
+    addToClicked,
+    deleteFirst
 };

@@ -20,3 +20,4 @@ app.use((req, res, next) => {
 const port = process.env.port || 8080;
 app.listen(port)
 console.log(`Web server at port: ${port}`);
+console.log('http://localhost:8080/doc/#/');
