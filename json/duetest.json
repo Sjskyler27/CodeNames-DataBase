@@ -1,0 +1,63 @@
+{
+    "_id": "6466ea5860cd5141745e8edd",
+    "code": "4",
+    "words": [
+      "TUBE",
+      "PLOT",
+      "BOW",
+      "PASTE",
+      "ANGEL",
+      "LASER",
+      "POUND",
+      "SCORPION",
+      "DOG",
+      "KNIGHT",
+      "TAIL",
+      "SHAKESPEARE",
+      "MISSILE",
+      "WHALE",
+      "FACE",
+      "SINK",
+      "WIND",
+      "TRAIN",
+      "MODEL",
+      "PENGUIN",
+      "LION",
+      "CANADA",
+      "BUG",
+      "EGYPT",
+      "HOOD"
+    ],
+    "firstPlayer": "blue",
+    "Green": [
+      "PENGUIN",
+      "ANGEL",
+      "TAIL",
+      "DOG",
+      "SINK",
+      "TRAIN",
+      "POUND",
+      "PLOT",
+      "SHAKESPEARE",
+      "KNIGHT",
+      "BOW",
+      "EGYPT",
+      "BUG",
+      "LION",
+      "TUBE"
+    ],
+    "Yellow": [
+      "FACE",
+      "WIND",
+      "CANADA",
+      "WHALE",
+      "LASER",
+      "HOOD",
+      "SCORPION",
+      "MODEL",
+      "PASTE"
+    ],
+    "Black": [
+      "MISSILE"
+    ]
+  }
