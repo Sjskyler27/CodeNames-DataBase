@@ -184,7 +184,7 @@ const createFromWords = async (req, res)=>{
         });
 
         // After adding a new one, delete the first
-        // await db.collection('duet_solutions').findOneAndDelete({});
+        await db.collection('duet_solutions').findOneAndDelete({});
     } else {
         res.status(500).json(response.error || 'could not create the solution.');
     }
