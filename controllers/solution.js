@@ -143,7 +143,7 @@ const addToClicked = async (req, res) => {
     }
   };
   
-  
+
 
 const deleteFirst = async (req, res) => {
     // #swagger.description = 'Deletes the first solution.'
@@ -157,6 +157,8 @@ const deleteFirst = async (req, res) => {
         res.status(500).json(response.error || 'Could not delete the document.');
     }
 }
+
+
 module.exports = {
     getAll,
     getByCode,
