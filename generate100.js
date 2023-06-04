@@ -1,10 +1,11 @@
 const fs = require('fs');
-import jsonList from "./json/words.json";
+const jsonList = require('./json/words.json');
+const _ = require('lodash'); 
 
 async function generate100() {
   const solutions = [];
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 1000; i++) {
     const getWords = _.shuffle(jsonList.wordList);
     const wordList = getWords.slice(0, 25);
     const code = i;
