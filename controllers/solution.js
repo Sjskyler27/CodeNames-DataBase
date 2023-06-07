@@ -1,11 +1,14 @@
 const _ = require('lodash');
-
 const database = require('../db/connect');
+const Api404Error = require('../error-handler/apiError404')
 
 const getAll = async (req, res)=>{
     // #swagger.description = 'get all solutions'
     const db = await database.connectDatabase();
     const result = await db.collection('solutions').find().toArray();
+    if (result){
+        throw new Api404Error(`game codes not found.`);
+    }
     console.log(result);
     res.send(result);
 };
@@ -14,11 +17,22 @@ const getByCode = async (req, res)=>{
     // #swagger.description = 'Retrieves a solution by code.'
     // #swagger.parameters['code'] = { in: 'path', description: 'Code of the solution to retrieve', required: true, type: 'string' }
   
-    const db = await database.connectDatabase();
-    const code = req.params.code;
-    const result = await db.collection('solutions').findOne({"code": code});
-    console.log(result);
-    res.send(result);
+    console.log('throw error');
+    try{
+        const db = await database.connectDatabase();
+        const code = req.params.code;
+        const result = await db.collection('solutions').findOne({"code": code});
+        if (result == null){
+            throw new Api404Error(`game with id: ${req.params.code} not found.`);
+        }
+        console.log(result);
+        res.send(result);
+    }
+    catch(e){
+        console.error(e);
+        res.status(500).json('An error occurred while retrieving that game.');
+    }
+    
 };
 
 const getAllCodes = async (req, res) => {
