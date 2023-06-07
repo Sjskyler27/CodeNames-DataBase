@@ -30,7 +30,7 @@ const getByCode = async (req, res)=>{
     }
     catch(e){
         console.error(e);
-        res.status(500).json('An error occurred while retrieving that game.');
+        res.status(500).json('An error occurred while retrieving that game, but you can still use the locally stored solutions with route /local/0-999.');
     }
     
 };
@@ -131,7 +131,7 @@ const createFromWords = async (req, res)=>{
 
     } catch (error) {
         console.error(error);
-        res.status(500).json('An error occurred while creating the that game, but you can still use the locally stored solutions.');
+        res.status(500).json('An error occurred while creating the that game, but you can still use the locally stored solutions with route /local/0-999.');
     }
     
     
