@@ -4,6 +4,7 @@ const cors = require('cors'); // Import the cors middleware
 
 routes.use(cors()); // Enable CORS for all routes
 
+routes.get('/local/:code', controller.getLocalCode);
 routes.get('/getAllCodes', controller.getAllCodes);
 routes.get('/:code', controller.getByCode);
 routes.get('/', controller.getAll);

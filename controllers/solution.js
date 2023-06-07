@@ -1,12 +1,13 @@
 const _ = require('lodash');
 const database = require('../db/connect');
-const Api404Error = require('../error-handler/apiError404')
+const Api404Error = require('../error-handler/apiError404');
+const localSolutions = require('../solutions.json');
 
 const getAll = async (req, res)=>{
     // #swagger.description = 'get all solutions'
     const db = await database.connectDatabase();
     const result = await db.collection('solutions').find().toArray();
-    if (result){
+    if (result == null){
         throw new Api404Error(`game codes not found.`);
     }
     console.log(result);
@@ -17,7 +18,6 @@ const getByCode = async (req, res)=>{
     // #swagger.description = 'Retrieves a solution by code.'
     // #swagger.parameters['code'] = { in: 'path', description: 'Code of the solution to retrieve', required: true, type: 'string' }
   
-    console.log('throw error');
     try{
         const db = await database.connectDatabase();
         const code = req.params.code;
@@ -31,6 +31,27 @@ const getByCode = async (req, res)=>{
     catch(e){
         console.error(e);
         res.status(500).json('An error occurred while retrieving that game.');
+    }
+    
+};
+
+const getLocalCode = async (req, res)=>{
+    // #swagger.description = 'Retrieves a solution by using the locally stored json data for backup.'
+    // #swagger.parameters['code'] = { in: 'path', description: 'Code of the solution to retrieve', required: true, type: 'string' }
+  
+    console.log('grabbing local solution');
+    try{
+        const code = req.params.code;
+        const result = localSolutions[code];
+        if (result == null){
+            throw new Api404Error(`game with id: ${req.params.code} not found.`);
+        }
+        console.log(result);
+        res.send(result);
+    }
+    catch(e){
+        console.error(e);
+        res.status(500).json('An error occurred while retrieving that local game.');
     }
     
 };
@@ -53,18 +74,23 @@ const getAllCodes = async (req, res) => {
 const basicCreate = async (req, res)=>{
     // #swagger.description = 'Creates a new solution.'
     // #swagger.parameters['body'] = { in: 'body', description: 'Solution data', required: true, schema: { $ref: '#/definitions/SolutionData' } }
-    const db = await database.connectDatabase();
-    console.log('attempting to insert: \n' + req.body);
-    const solution = {
-        code: req.body.code,
-        words: req.body.words,
-        firstPlayer: req.body.firstPlayer,
-        Player1: req.body.Player1,
-        Player2: req.body.Player2,
-        Yellow: req.body.Yellow,
-        Black: req.body.Black
-      };
 
+    try{
+        const db = await database.connectDatabase();
+        console.log('attempting to insert: \n' + req.body);
+        const solution = {
+            code: req.body.code,
+            words: req.body.words,
+            firstPlayer: req.body.firstPlayer,
+            Player1: req.body.Player1,
+            Player2: req.body.Player2,
+            Yellow: req.body.Yellow,
+            Black: req.body.Black
+        };
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('An error occurred while creating the codes.');
+    }
     const response = await db.collection('solutions').insertOne(solution);
 
     if (response.acknowledged) {
@@ -77,30 +103,37 @@ const createFromWords = async (req, res)=>{
     // #swagger.description = 'Creates a new solution from words.'
     // #swagger.parameters['body'] = { in: 'body', description: 'List of words', required: true, schema: { $ref: '#/definitions/WordList' } }
   
-    const db = await database.connectDatabase();
-    console.log('attempting to create document: \n');
+    try{
+        const db = await database.connectDatabase();
+        console.log('attempting to create document: \n');
 
-    const getWords =  _.shuffle(req.body.wordList)
+        const getWords =  _.shuffle(req.body.wordList)
+        
+        const wordList = getWords.slice(0,25);
+        const code= _.sampleSize('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4).join('');
+        const firstPlayer= _.sample(['red', 'blue']);
+        const player1= wordList.slice(0,9);
+        const player2= wordList.slice(9,17);
+        const yellow= wordList.slice(17,24);
+        const black= wordList.slice(24,25);
+        const shuffledWords = _.shuffle(wordList)
+
+        const solution = {
+            code: code, 
+            words: shuffledWords,
+            firstPlayer: firstPlayer,
+            Player1: player1,
+            Player2: player2,
+            Yellow: yellow,
+            Black: black,
+            clicked: ['test']
+        };
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json('An error occurred while creating the that game, but you can still use the locally stored solutions.');
+    }
     
-    const wordList = getWords.slice(0,25);
-    const code= _.sampleSize('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4).join('');
-    const firstPlayer= _.sample(['red', 'blue']);
-    const player1= wordList.slice(0,9);
-    const player2= wordList.slice(9,17);
-    const yellow= wordList.slice(17,24);
-    const black= wordList.slice(24,25);
-    const shuffledWords = _.shuffle(wordList)
-
-    const solution = {
-        code: code, 
-        words: shuffledWords,
-        firstPlayer: firstPlayer,
-        Player1: player1,
-        Player2: player2,
-        Yellow: yellow,
-        Black: black,
-        clicked: ['test']
-      };
     
     const response = await db.collection('solutions').insertOne(solution);
     
@@ -180,5 +213,6 @@ module.exports = {
     basicCreate,
     createFromWords,
     addToClicked,
-    deleteFirst
+    deleteFirst,
+    getLocalCode
 };
