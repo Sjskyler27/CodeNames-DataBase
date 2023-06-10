@@ -3,6 +3,17 @@ const database = require('../db/connect');
 const Api404Error = require('../error-handler/apiError404');
 const localSolutions = require('../solutions.json');
 
+const getStatus = async(req, res) => {
+  res.send(
+    req.oidc.isAuthenticated() ? "you are logged in" : "you are logged out"
+  );
+};
+
+const getProfile = async(req, res) =>{
+    console.log("getting profile");
+    res.send(JSON.stringify(req.oidc.user));
+};
+
 const getAll = async (req, res)=>{
     // #swagger.description = 'get all solutions'
     const db = await database.connectDatabase();
@@ -214,5 +225,7 @@ module.exports = {
     createFromWords,
     addToClicked,
     deleteFirst,
-    getLocalCode
+    getLocalCode,
+    getStatus,
+    getProfile
 };

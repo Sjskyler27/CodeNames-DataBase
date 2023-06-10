@@ -1,6 +1,6 @@
 const fs = require('fs');
 const jsonList = require('./json/words.json');
-const _ = require('lodash'); 
+const _ = require('lodash');
 
 async function generate100() {
   const solutions = [];
