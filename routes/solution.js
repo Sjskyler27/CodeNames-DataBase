@@ -14,7 +14,7 @@ routes.get('/profile', requiresAuth(),controller.getProfile);
 routes.get('/local/:code', controller.getLocalCode);
 routes.get('/getAllCodes', controller.getAllCodes);
 routes.get('/:code', controller.getByCode);
-routes.get('/', requiresAuth(), controller.getAll);
+routes.get('/', controller.getAll);
 
 routes.post('/create', controller.basicCreate);
 routes.post('/createFromWords', controller.createFromWords);
