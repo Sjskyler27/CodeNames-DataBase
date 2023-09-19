@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const { check, validationResult } = require('express-validator')
 
 const database = require('../db/connect');
 const duetjson = require('../json/duetest.json');
@@ -14,12 +15,25 @@ const getAll = async (req, res)=>{
 const getByCode = async (req, res)=>{
     // #swagger.description = 'Retrieves a solution by code.'
     // #swagger.parameters['code'] = { in: 'path', description: 'Code of the solution to retrieve', required: true, type: 'string' }
-  
+    
     const db = await database.connectDatabase();
     const code = req.params.code;
-    const result = await db.collection('duet_solutions').findOne({"code": code});
-    console.log(result);
-    res.send(result);
+
+    // vallidate the code
+    try{
+        check(code).isLength({max: 4});
+    }
+    catch(e){
+        res.send(e);
+    }
+    try{
+        const result = await db.collection('duet_solutions').findOne({"code": code});
+        console.log(result);
+        res.send(result);
+    }catch (error) {
+        console.error(error);
+        res.status(500).json('An error occurred while retrieving that code.');
+    }
 };
 
 const getAllCodes = async (req, res) => {
