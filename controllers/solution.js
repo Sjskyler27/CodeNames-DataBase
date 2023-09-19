@@ -142,7 +142,22 @@ const createFromWords = async (req, res) => {
       Black: black,
       clicked: ['test'],
     };
+
     const response = await db.collection('solutions').insertOne(solution);
+
+    if (response.acknowledged) {
+      // Send a response with the code and other data
+      res.status(201).json({
+        code: code,
+        message: 'Solution created successfully',
+        documentId: response.insertedId, // You might also want the MongoDB document ID
+      });
+
+      // After adding a new one, delete the first
+      await db.collection('solutions').findOneAndDelete({});
+    } else {
+      res.status(500).json(response.error || 'could not create the solution.');
+    }
   } catch (error) {
     console.error(error);
     res
@@ -150,20 +165,6 @@ const createFromWords = async (req, res) => {
       .json(
         'An error occurred while creating the that game, but you can still use the locally stored solutions with route /local/0-999.'
       );
-  }
-
-  if (response.acknowledged) {
-    // Send a response with the code and other data
-    res.status(201).json({
-      code: code,
-      message: 'Solution created successfully',
-      documentId: response.insertedId, // You might also want the MongoDB document ID
-    });
-
-    // After adding a new one, delete the first
-    await db.collection('solutions').findOneAndDelete({});
-  } else {
-    res.status(500).json(response.error || 'could not create the solution.');
   }
 };
 
