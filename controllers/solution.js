@@ -124,7 +124,7 @@ const createFromWords = async (req, res) => {
     const getWords = _.shuffle(req.body.wordList);
 
     // Simulate a 15-second delay (adjust as needed)
-    await new Promise((resolve) => setTimeout(resolve, 15000)); // 15 seconds delay
+    // await new Promise((resolve) => setTimeout(resolve, 1000)); // 15 seconds delay
 
     const wordList = getWords.slice(0, 25);
     const code = _.sampleSize('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 4).join('');
